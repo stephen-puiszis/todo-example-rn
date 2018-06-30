@@ -11,12 +11,15 @@ import {
 class Row extends Component {
   render() {
     const { complete } = this.props;
+    const styleHelper = (complete) => {
+      return [styles.text, complete && styles.complete];
+    }
     const textComponent = (
       <TouchableOpacity
         style={styles.textWrap}
         onLongPress={() => this.props.onToggleEdit(true)}
       >
-        <Text style={[styles.text, complete && styles.complete]}>
+        <Text style={styleHelper(complete)}>
           {this.props.text}
         </Text>
       </TouchableOpacity>
