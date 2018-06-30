@@ -1,34 +1,35 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-// Styling seems like it should be DRY'd up into a helper function
-// How to deal with the hanging carrot?
-//
+// TODO: Styling seems like it should be DRY'd up into a helper function
+// TODO: Move Each Filter into it's own button component
+
 class Footer extends Component {
   render() {
     const { filter } = this.props;
-
+    const filterStyles = (filter, targetFilter) => {
+      return [styles.filter, filter == targetFilter && styles.selected];
+    }
     return (
       <View style={styles.container}>
         <Text>{this.props.count} todos</Text>
         <View style={styles.filters}>
 
           <TouchableOpacity
-
-            style={[styles.filter, filter == "all" && styles.selected]}
+            style={filterStyles(filter, "all")}
             onPress={() => this.props.onFilter("all")}
           >
             <Text>All</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.filter, filter == "active" && styles.selected]}
+            style={filterStyles(filter, "active")}
             onPress={() => this.props.onFilter("active")}
           >
             <Text>Active</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.filter, filter == "completed" && styles.selected]}
+            style={filterStyles(filter, "completed")}
             onPress={() => this.props.onFilter("completed")}
           >
             <Text>Completed</Text>
