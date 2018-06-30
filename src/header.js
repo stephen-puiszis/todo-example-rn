@@ -15,6 +15,7 @@ class Header extends Component {
         </TouchableOpacity>
         <TextInput
           style={styles.input}
+          autofocus
           value={this.props.value}
           onChangeText={this.props.onChange}
           onSubmitEditing={this.props.onAddItem}
