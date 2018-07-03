@@ -4,44 +4,37 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 // TODO: Move Each Filter into it's own button component
 
 class Footer extends Component {
+  
+  filterPressed(id) {
+    this.props.onFilter(id)
+  } 
+
   render() {
+    const filters = ["all", "completed", "active"]
     const { filter } = this.props;
-    const filterStyles = (filter, targetFilter) => {
-      return [styles.filter, filter == targetFilter && styles.selected];
-    }
+    
     return (
       <View style={styles.container}>
         <Text>{this.props.count} todos</Text>
         <View style={styles.filters}>
-
-          <TouchableOpacity
-            style={filterStyles(filter, "all")}
-            onPress={() => this.props.onFilter("all")}
-          >
-            <Text>All</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={filterStyles(filter, "active")}
-            onPress={() => this.props.onFilter("active")}
-          >
-            <Text>Active</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={filterStyles(filter, "completed")}
-            onPress={() => this.props.onFilter("completed")}
-          >
-            <Text>Completed</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.props.onClearComplete}>
-            <Text>Clear Completed</Text>
-          </TouchableOpacity>
+          <FilterButton onPress={() => this.filterPressed("all")} id="all" name="All" selected={"all" == filter }/>
+          <FilterButton onPress={() => this.filterPressed("active")} id="active" name="Active" selected={"active"== filter }/>
+          <FilterButton onPress={() => this.filterPressed("completed")} id="completed" name="Completed" selected={"completed" == filter }/>
         </View>
       </View>
     )
   }
+}
+
+const FilterButton = ({onPress, name, selected}) => {
+  const style = [styles.filter, selected && styles.selected]
+
+  return (  
+    <TouchableOpacity style={style}
+      onPress={onPress}>
+      <Text>{name}</Text>
+    </TouchableOpacity>
+  )
 }
 
 const styles = StyleSheet.create({
