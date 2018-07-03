@@ -12,7 +12,7 @@ import {
 import Header from "./src/header";
 import Footer from "./src/footer";
 import Row from "./src/row";
-import { filterItems } from "./src/helpers/filter_helper"
+import { filterItems } from "./src/helpers/filterItems"
 
 export default class App extends Component {
   constructor(props) {
